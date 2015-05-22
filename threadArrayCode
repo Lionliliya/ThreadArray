@@ -1,0 +1,51 @@
+package oop6;
+
+import java.util.Random;
+
+public class Threads400 implements Runnable{
+	private int [] arr = new int[400];
+	int n;
+	
+	public Threads400(int[] arr, int n) {
+		super();
+		this.arr = arr;
+		this.n = n;
+	}
+	
+	@Override
+	public void run() {
+		int sum=0;
+		for (int i = 0; i<arr.length; i++) {
+			try { 
+				if (arr[i]%this.n==0) {
+				sum+=arr[i];
+				} 
+			} catch (ArithmeticException e) {
+				System.out.println("Error in calculating sum");
+			}
+		}
+		System.out.println("Поток номер "+ this.n+ ". Сумма элементов массива, кратных "+this.n +" = "+sum+".");
+		
+		
+	}
+	public static void main (String [] args) {
+		Random rn = new Random();
+		int[] arr = new int[400];
+		for (int i = 0; i<arr.length; i++) {
+			arr[i] = rn.nextInt(9);
+		}
+		for (int k:arr) {
+			System.out.print(k+" ");
+		}
+		System.out.println();
+		
+		for (int i = 1; i<=10; i++) {
+		try { 
+			Thread tr = new Thread(new Threads400(arr, i));
+			tr.start();
+		} catch (Exception ex) {
+			System.out.println( "Error inside thread");
+		}
+	  }
+  }
+}
