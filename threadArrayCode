@@ -15,14 +15,12 @@ public class Threads400 implements Runnable{
 	@Override
 	public void run() {
 		int sum=0;
-		for (int i = 0; i<arr.length; i++) {
-			try { 
-				if (arr[i]%this.n==0) {
+		for (int i = 1; i<=arr.length; i++) {
+			
+			if (arr[i]%this.n==0) {
 				sum+=arr[i];
-				} 
-			} catch (ArithmeticException e) {
-				System.out.println("Error in calculating sum");
-			}
+			} 
+			
 		}
 		System.out.println("Поток номер "+ this.n+ ". Сумма элементов массива, кратных "+this.n +" = "+sum+".");
 		
